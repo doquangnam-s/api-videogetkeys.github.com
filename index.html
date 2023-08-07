@@ -5,9 +5,7 @@
 </head>
 <body>
   <h1>Thông tin từ URL</h1>
-  <p>tile: <span id="tile"></span></p>
-  <p>url: <span id="url"></span></p>
-  <p>ip: <span id="ip-address"></span></p>
+  <pre id="json-output"></pre>
 
   <script>
     function getIPAddress() {
@@ -21,10 +19,15 @@
           const name = params.get('url');
           const tile = params.get('tile');
 
-          // Gán giá trị vào các phần tử HTML
-          document.getElementById('tile').textContent = tile || 'Không tìm thấy tên';
-          document.getElementById('url').textContent = name || 'Không tìm thấy tên';
-          document.getElementById('ip-address').textContent = ipAddress || 'Không tìm thấy địa chỉ IP';
+          // Tạo đối tượng JSON từ dữ liệu thu thập được
+          const info = {
+            tile: tile || 'Không tìm thấy tên',
+            url: name || 'Không tìm thấy tên',
+            ip: ipAddress || 'Không tìm thấy địa chỉ IP'
+          };
+
+          // Hiển thị dữ liệu dưới dạng JSON
+          document.getElementById('json-output').textContent = JSON.stringify(info, null, 2);
         })
         .catch(error => {
           console.error('Có lỗi xảy ra khi lấy địa chỉ IP:', error);
