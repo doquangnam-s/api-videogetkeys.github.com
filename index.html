@@ -1,8 +1,13 @@
-<?php
-if (isset($_GET['i'])) {
-    $pValue = $_GET['i'];
-    echo "The value of 'p' is: " . $pValue;
-} else {
-    echo "No 'p' parameter found in the URL.";
-}
-?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trích xuất thông tin từ URL</title>
+</head>
+<body>
+  <h1>Thông tin từ URL</h1>
+  <p>Tên: <span id="name"></span></p>
+  <p>Tuổi: <span id="age"></span></p>
+
+  <script src="script.js"></script>
+</body>
+</html>
