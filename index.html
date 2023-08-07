@@ -5,7 +5,8 @@
 </head>
 <body>
   <h1>Thông tin từ URL</h1>
-  <p>Tên: <span id="name"></span></p>
+  <p>tile: <span id="tile"></span></p>
+  <p>url: <span id="url"></span></p>
   <p>ip: <span id="ip-address"></span></p>
 
   <script>
@@ -17,11 +18,12 @@
 
           const queryParams = window.location.search;
           const params = new URLSearchParams(queryParams);
-          const name = params.get('name');
-          const age = params.get('age');
+          const name = params.get('url');
+          const age = params.get('tile');
 
           // Gán giá trị vào các phần tử HTML
-          document.getElementById('name').textContent = name || 'Không tìm thấy tên';
+          document.getElementById('tile').textContent = tile || 'Không tìm thấy tên';
+          document.getElementById('url').textContent = name || 'Không tìm thấy tên';
           document.getElementById('ip-address').textContent = ipAddress || 'Không tìm thấy địa chỉ IP';
         })
         .catch(error => {
