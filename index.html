@@ -6,7 +6,7 @@
 <body>
   <h1>Thông tin từ URL</h1>
   <p>Tên: <span id="name"></span></p>
-  <p>Tuổi: <span id="age"></span></p>
+  <p>ip: <span id="age"></span></p>
 
   <script>
     function getIPAddress() {
@@ -23,7 +23,7 @@
             
             // Gán giá trị vào các phần tử HTML
             document.getElementById('name').textContent = name;
-            document.getElementById('ip').textContent = ipAddress;
+            document.getElementById('age').textContent = ipAddress;
                     })
                     .catch(error => {
                       console.error('Có lỗi xảy ra khi lấy địa chỉ IP:', error);
