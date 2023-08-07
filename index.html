@@ -19,7 +19,7 @@
           const queryParams = window.location.search;
           const params = new URLSearchParams(queryParams);
           const name = params.get('url');
-          const age = params.get('tile');
+          const tile = params.get('tile');
 
           // Gán giá trị vào các phần tử HTML
           document.getElementById('tile').textContent = tile || 'Không tìm thấy tên';
