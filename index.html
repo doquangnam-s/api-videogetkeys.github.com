@@ -6,7 +6,7 @@
 <body>
   <h1>Thông tin từ URL</h1>
   <p>Tên: <span id="name"></span></p>
-  <p>ip: <span id="age"></span></p>
+  <p>ip: <span id="ip-address"></span></p>
 
   <script>
     function getIPAddress() {
@@ -14,24 +14,23 @@
         .then(response => response.json())
         .then(data => {
           const ipAddress = data.ip;
-         
-          
-            const queryParams = window.location.search;
-            const params = new URLSearchParams(queryParams);
-            const name = params.get('name');
-            const age = params.get('age');
-            
-            // Gán giá trị vào các phần tử HTML
-            document.getElementById('name').textContent = name;
-            document.getElementById('age').textContent = ipAddress;
-                    })
-                    .catch(error => {
-                      console.error('Có lỗi xảy ra khi lấy địa chỉ IP:', error);
-                    });
+
+          const queryParams = window.location.search;
+          const params = new URLSearchParams(queryParams);
+          const name = params.get('name');
+          const age = params.get('age');
+
+          // Gán giá trị vào các phần tử HTML
+          document.getElementById('name').textContent = name || 'Không tìm thấy tên';
+          document.getElementById('ip-address').textContent = ipAddress || 'Không tìm thấy địa chỉ IP';
+        })
+        .catch(error => {
+          console.error('Có lỗi xảy ra khi lấy địa chỉ IP:', error);
+        });
     }
 
-    // Gọi hàm lấy địa chỉ IP khi trang tải xong
-    window.onload = getIPAddress;
-</script>
+    // Gọi hàm lấy địa chỉ IP sau khi trang đã tải xong
+    document.addEventListener('DOMContentLoaded', getIPAddress);
+  </script>
 </body>
 </html>
