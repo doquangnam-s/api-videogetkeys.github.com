@@ -9,16 +9,29 @@
   <p>Tuổi: <span id="age"></span></p>
 
   <script>
-const queryParams = window.location.search;
+    function getIPAddress() {
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          const ipAddress = data.ip;
+         
+          
+            const queryParams = window.location.search;
+            const params = new URLSearchParams(queryParams);
+            const name = params.get('name');
+            const age = params.get('age');
+            
+            // Gán giá trị vào các phần tử HTML
+            document.getElementById('name').textContent = name;
+            document.getElementById('ip').textContent = ipAddress;
+                    })
+                    .catch(error => {
+                      console.error('Có lỗi xảy ra khi lấy địa chỉ IP:', error);
+                    });
+    }
 
-// Chuyển phần query parameters thành một đối tượng JavaScript
-const params = new URLSearchParams(queryParams);
-const name = params.get('name');
-const age = params.get('age');
-
-// Gán giá trị vào các phần tử HTML
-document.getElementById('name').textContent = name;
-document.getElementById('age').textContent = age;
+    // Gọi hàm lấy địa chỉ IP khi trang tải xong
+    window.onload = getIPAddress;
 </script>
 </body>
 </html>
