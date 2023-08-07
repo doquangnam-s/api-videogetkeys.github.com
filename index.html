@@ -8,6 +8,8 @@
   <pre id="json-output"></pre>
 
   <script>
+    let dataArr = []; // Mảng để lưu trữ các JSON object
+
     function getIPAddress() {
       fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
@@ -26,8 +28,13 @@
             ip: ipAddress || 'Không tìm thấy địa chỉ IP'
           };
 
+          dataArr.push(info); // Thêm JSON object vào mảng
+
           // Hiển thị dữ liệu dưới dạng JSON
-          document.getElementById('json-output').textContent = JSON.stringify(info, null, 2);
+          document.getElementById('json-output').textContent = JSON.stringify(dataArr, null, 2);
+
+          // Lưu JSON vào tệp keys.json
+          saveJSONToFile(dataArr);
         })
         .catch(error => {
           console.error('Có lỗi xảy ra khi lấy địa chỉ IP:', error);
@@ -36,6 +43,23 @@
 
     // Gọi hàm lấy địa chỉ IP sau khi trang đã tải xong
     document.addEventListener('DOMContentLoaded', getIPAddress);
+
+    function saveJSONToFile(data) {
+      const jsonData = JSON.stringify(data, null, 2);
+
+      // Tạo Blob từ JSON data
+      const blob = new Blob([jsonData], { type: 'application/json' });
+
+      // Tạo URL từ Blob và tạo liên kết tải xuống
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'keys.json';
+      document.body.appendChild(a);
+      a.click(); // Kích hoạt việc tải xuống
+      document.body.removeChild(a); // Loại bỏ phần tử a
+      URL.revokeObjectURL(url); // Thu hồi URL của Blob
+    }
   </script>
 </body>
 </html>
