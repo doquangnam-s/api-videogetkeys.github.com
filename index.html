@@ -8,6 +8,17 @@
   <p>Tên: <span id="name"></span></p>
   <p>Tuổi: <span id="age"></span></p>
 
-  <script src="script.js"></script>
+  <script>
+const queryParams = window.location.search;
+
+// Chuyển phần query parameters thành một đối tượng JavaScript
+const params = new URLSearchParams(queryParams);
+const name = params.get('name');
+const age = params.get('age');
+
+// Gán giá trị vào các phần tử HTML
+document.getElementById('name').textContent = name;
+document.getElementById('age').textContent = age;
+</script>
 </body>
 </html>
